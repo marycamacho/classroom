@@ -71,7 +71,7 @@
         if (last_play =="Q") {
             score = score -77;
         }
-        if (is_in_tree == true && typeof(last_play) != "number" ) {
+        if (is_in_tree && typeof(last_play) != "number" ) {
             score = score + 395;
         }
         if (broom == "handle") {
@@ -81,7 +81,7 @@
         } else {
             score = score * .5;
         }
-        if (has_ball == true && is_in_tree == false && crying != true) {
+        if (has_ball && !is_in_tree && !crying) {
             score = score * 1.5;
         }
         if (typeof(last_play) == "number") {
