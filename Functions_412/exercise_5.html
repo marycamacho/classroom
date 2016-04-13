@@ -17,7 +17,7 @@
         function getAverage() {
             return sum / number;
         }
-        
+
         /*
             TODO: Using the functions above, compute and print the average of:
             13, 4, 134, 21, 30
@@ -25,14 +25,31 @@
 
         var list = [13, 4, 134, 21, 30];
 
-        function averageArray () {
-
+        // for loop to go through array
+        for(var index = 0; index < list.length; index++) {
+            addToAverage(list[index]);
         }
+
+        var average = getAverage();
+        console.log("Average of Array:", average);
+
+
         
-        /*
-            Optional: Create a function which averages an array of numbers
-            Optional: Create a variadic funciton which averages all of its arguments
-        */
+        // Optional: Create a function which averages an array of numbers
+
+        function averageArray () {
+            var sumArray = list.reduce(function(pv, cv) {
+                return pv + cv;
+            }, 0);
+            return sumArray / list.length;
+        }
+        console.log ("Average of Array:", averageArray());
+
+
+
+
+        // Optional: Create a variadic funciton which averages all of its arguments
+
     
     </script>
 </body>
