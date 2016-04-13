@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Expletus+Sans:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Random Number Game</title>
+</head>
+<body>
+
+<form>
+    <input type="text" id="text">
+    <button id="button" type="submit">Guess the Number</button>
+</form>
+
+<div id="output">
+
+</div>
+<script>
+    var rand = Math.floor(Math.random() * 100) + 1;
+    var attempt = document.getElementById("button");
+    var userNumber = document.getElementById("text");
+    var block = document.getElementById("output");
+
+    function buttonClick (){
+        if (userNumber > rand) {
+            block.innerHTML = "too high!";
+        } else if (userNumber < rand) {
+            block.innerHTML = "too low!";
+        } else {
+            block.innerHTML = "You Win!";
+        }
+    }
+
+    attempt.onclick = buttonClick;
+</script>
+
+<!-- SCRIPTS -->
+<script src="js/jquery-2.2.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
