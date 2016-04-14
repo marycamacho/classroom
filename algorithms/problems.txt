@@ -1,0 +1,26 @@
+Write a function which takes an array of numbers and returns the minimum of that array.
+[3,4,5] -> 3
+[2, -30] -> -30
+
+Write a function which takes an array of numbers and returns the maximum of that array.
+[3,4,5] -> 5
+[-10, 2] -> 2
+
+Write a function which takes an array of numbers and returns the average of that array.
+[2, 4, 6] - > 4
+[0, 0, 0, 10] -> 2.5
+
+Write a function which takes an array of integers > 0 and returns  the first integer which does not appear in that array.
+[1,2,5] -> 3
+[1,2,3,4,5] -> 6
+
+Write a function which takes an array of integers and returns an array with any duplicate integers removed.
+[1,1,2,3,1,2,3] -> [1,2,3]
+[1,4,4,4,2,2,4,4,4] -> [1,4,2]
+
+Write a function which takes an array of integers > 0 and returns an array of integers which only occur once in the original array.
+[1,1,2,2,3] -> [3]
+[1,2,3,5,3,2,4,1] -> [4, 5]
+
+
+ 
