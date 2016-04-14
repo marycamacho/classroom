@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<!--    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Expletus+Sans:700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <title>mary's portfolio</title>
+    <title>mary's portfolio</title>-->
 </head>
 <body>
-<script>
+<!--<script>
 // Primitives
     var string = "This is a string.";
     var number = 4;
@@ -66,6 +66,35 @@ for (var i = 0; i < $(el).attr("data-suqsare"); i++) {
 
 
 
-</p>
+</p>-->
+
+
+<button id="bake">
+    Make me a croissant, croissant person!
+</button>
+
+<div id="croissants">
+
+</div>
+
+<script>
+
+    var croissantCounter = document.getElementById("croissants");
+    var numOfCroissants = 0;
+    var bakeButton = document.getElementById("bake");
+    bakeButton.onclick = bakeCroissant;
+
+    function bakeCroissant(){
+        numOfCroissants = numOfCroissants + 1;
+        croissantCounter.innerHTML = "&#9790;" + numOfCroissants;
+    }
+
+</script>
+<!--
+
+notes 4-13
+hoisting in javascript means that creation of variable is done at beginning, but the assignment is not necessarily occuring
+
+-->
 </body>
 </html>
