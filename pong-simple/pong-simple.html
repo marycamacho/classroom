@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #world {
+            width: 500px;
+            height: 500px;
+            background-color: black;
+            position: relative;
+            cursor: none;
+        }
+
+        #paddle {
+            width: 20px;
+            height: 100px;
+            background-color: white;
+            position: absolute;
+        }
+
+        #ball {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<div id="world">
+    <div id="paddle"></div>
+    <div id="ball"></div>
+</div>
+
+<script>
+    /**
+     * Make the ball bounce off the paddle
+     * Add a computer controlled paddle for player 2
+     * Figure out keyboard controls?
+     * Do other weird stuff
+     (let the paddle shoot the ball!)
+     (allow the paddle to move in the x dir also!)
+     (add powerups!)
+     (whatever!)
+     (add an obsticle!)
+     **/
+
+    var worldElement = document.getElementById("world");
+    var paddleElement = document.getElementById("paddle");
+    var ballElement = document.getElementById("ball");
+
+    var paddle = {
+        x : 20,
+        y : 200
+    };
+
+    var ball = {
+        x: 150,
+        y: 300,
+        vx: 5,
+        vy: 5
+    };
+
+    function update() {
+        ball.x += ball.vx;
+        ball.y += ball.vy;
+
+        if (ball.y > 480 && ball.vy > 0) {
+            ball.vy = -ball.vy;
+        } else if (ball.y < 0 && ball.vy < 0) {
+            ball.vy = -ball.vy;
+        }
+
+        if (ball.x > 480 && ball.vx > 0) {
+            ball.vx = -ball.vx;
+        } else if (ball.x < 0 && ball.vx < 0) {
+            ball.vx = -ball.vx;
+        }
+    }
+
+    function draw() {
+        paddleElement.style.top = paddle.y + "px";
+        paddleElement.style.left = paddle.x + "px";
+
+        ballElement.style.top = ball.y + "px";
+        ballElement.style.left = ball.x + "px";
+    }
+
+    function frame() {
+        update();
+        draw();
+    }
+
+    function updateMouse(event) {
+        paddle.y = event.y - 50;
+    }
+
+    worldElement.onmousemove = updateMouse;
+
+    setInterval(frame, 1000/60);
+
+</script>
+</body>
+</html>
