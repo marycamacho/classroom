@@ -19,7 +19,7 @@
             position: absolute;
         }
 
-        #ball {
+        .ball {
             width: 20px;
             height: 20px;
             background-color: white;
@@ -32,7 +32,6 @@
 
 <div id="world">
     <div id="paddle"></div>
-    <div id="ball"></div>
 </div>
 
 <script>
@@ -50,34 +49,73 @@
 
     var worldElement = document.getElementById("world");
     var paddleElement = document.getElementById("paddle");
-    var ballElement = document.getElementById("ball");
 
-    var paddle = {
-        x : 20,
-        y : 200
-    };
+    /*
+     * Paddle
+     * Creates a new pong paddle
+     * @param x number the x position of the paddle
+     * @param y number the y position of the paddle
+     */
+    function Paddle(x, y) {
+        this.x = x;
+        this.y = y;
+        this.element = null;
+        this.makePaddleElement = function() {
+            this.element = document.createElement("div");
+            this.element.className = "paddle";
+            document.getElementById("world").appendChild(this.element);
+        }
+    }
 
-    var ball = {
-        x: 150,
-        y: 300,
-        vx: 5,
-        vy: 5
+
+    var collider = {
+        collide: function(padl, bal) {
+            if (bal.x < padl.x + 20 &&
+                    bal.x > padl.x &&
+                    bal.y > padl.y &&
+                    bal.y < padl.y + 100) {
+                bal.vx = -bal.vx;
+                //createSpheres(1);
+            }
+        }
+    }
+
+    function Ball(vx, vy) {
+        this.x = 150,
+                this.y = 300,
+                this.vx = vx,
+                this.vy = vy,
+                this.element = null,
+                this.move = function() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.y > 480 && this.vy > 0) {
+                        this.vy = -this.vy;
+                    } else if (this.y < 0 && this.vy < 0) {
+                        this.vy = -this.vy;
+                    }
+
+                    if (this.x > 480 && this.vx > 0) {
+                        this.vx = -this.vx;
+                    } else if (this.x < 0 && this.vx < 0) {
+                        this.vx = -this.vx;
+                    }
+                },
+                this.makeBallElement = function() {
+                    this.element = document.createElement("div");
+                    this.element.className = "ball";
+                    document.getElementById("world").appendChild(this.element);
+                },
+                this.draw = function () {
+                    this.element.style.top = this.y + "px";
+                    this.element.style.left = this.x + "px";
+                }
     };
 
     function update() {
-        ball.x += ball.vx;
-        ball.y += ball.vy;
-
-        if (ball.y > 480 && ball.vy > 0) {
-            ball.vy = -ball.vy;
-        } else if (ball.y < 0 && ball.vy < 0) {
-            ball.vy = -ball.vy;
-        }
-
-        if (ball.x > 480 && ball.vx > 0) {
-            ball.vx = -ball.vx;
-        } else if (ball.x < 0 && ball.vx < 0) {
-            ball.vx = -ball.vx;
+        for (var i = 0; i < spheres.length; i++) {
+            spheres[i].move();
+            collider.collide(paddle, spheres[i]);
         }
     }
 
@@ -85,8 +123,9 @@
         paddleElement.style.top = paddle.y + "px";
         paddleElement.style.left = paddle.x + "px";
 
-        ballElement.style.top = ball.y + "px";
-        ballElement.style.left = ball.x + "px";
+        for (var i = 0; i < spheres.length; i++) {
+            spheres[i].draw();
+        }
     }
 
     function frame() {
@@ -97,6 +136,18 @@
     function updateMouse(event) {
         paddle.y = event.y - 50;
     }
+
+    function createSpheres (num) {
+        for (var i = 0; i < num; i++) {
+            var b = new Ball((Math.random() * 10) - 5, (Math.random() * 10) - 5);
+            b.makeBallElement();
+            spheres.push(b);
+        }
+    }
+
+    var spheres = [];
+
+    createSpheres(10);
 
     worldElement.onmousemove = updateMouse;
 
