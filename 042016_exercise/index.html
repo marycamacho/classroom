@@ -11,8 +11,8 @@
 <script>//Finish the Following constructor
 
     function Sentence(wordsArray) {
+        this.wordsArray = wordsArray;
         var _wordsArray = wordsArray;
-
 
         this.getWordCount = function () {
             //find the amount of words in the sentence
@@ -21,9 +21,10 @@
 
         this.getLetterCount = function () {
             //find the amount of letters in the sentence
-            return _wordsArray.reduce(function (pv, cv) {
+            return _wordsArray.reduce (function (pv, cv) {
                 return (cv.length+1) + pv;
             }, 0)
+
         };
 
         this.reverse = function () {
@@ -35,6 +36,10 @@
             //return the word at index i
             return _wordsArray[i];
         };
+
+        this.getWordsArray = function() {
+            return _wordsArray;
+        };
     }
 
     /* Some Tests. Make them all pass! */
@@ -45,26 +50,59 @@
     console.log(s.getWordAt(0) == "Hello");
     s.reverse();
     console.log(s.getWordAt(0) == "Computer");
+    console.log (s.getWordsArray());
 
-/*
 
-Create a new constructor function for a Paragraph
+//Create a new constructor function for a Paragraph
 
-     You should be able to
-     var s2 = new Sentence ("I", "am", "not", "human");
-     p = new Paragraph([s, s2]);
+function Paragraph (sentencesArray) {
+    var _sentencesArray = sentencesArray;
 
-     Implement the following:
-     p.getWordCount()
-     p.getLetterCount()
-     p.getWordAt(10)
-     p.getSentenceCount()
-     p.addToHTML("paragraphs")
- */
+    this.getWordCount = function () {
+        //find the amount of words in the sentence
+        return _sentencesArray.reduce(function (pv, cv) {
+            // I would ask my ba if I needed to include punctuation and whether or not they were doing single or double spacing between sentences.
+            return (cv.getWordCount()+1) + pv;
+        }, 0);
+    };
+
+    /*this.getLetterCount = function () {
+        //find the amount of letters in the sentence
+        return _sentencesArray.reduce (function (pv, cv) {
+            //console.log pv cv
+            console.log(pv);
+            console.log(cv);
+            return (cv.getLetterCount()) + pv;
+        }, 0)
+    };*/
+
+    this.getWordAt = function (i) {
+        //return the word at index i
+        var combined = [];
+        for (var sentenceIndex =0; sentenceIndex < _sentencesArray.length; sentenceIndex++) {
+            combined = combined.concat(_sentencesArray[sentenceIndex].getWordCount());
+        }
+        return combined[i];
+    };
+
+    this.getSentenceCount = function () {
+        //find the amount of words in the sentence
+        return _sentencesArray.length;
+    };
+}
+
+     //You should be able to
+    var s2 = new Sentence ("I", "am", "not", "human");
+    var p = new Paragraph([s, s2]);
+
+     //Implement the following:
+     console.log (p.getWordCount());
+     //console.log (p.getLetterCount());
+     console.log (p.getWordAt(7));
+     console.log (p.getSentenceCount());
+     //p.addToHTML("paragraphs")
+
 
 </script>
 </body>
 </html>
-​
-​
-​

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+<div id="result"></div>
+
+<script>
+/*
+    Write a constructor for Car which takes in an array from the junkyard and creates
+    a new car object with those data. */
+
+     function Car (make, model, year, milg, colr, msrp) {
+
+         this.make = make;
+         this.model = model;
+         this.year = year;
+         this.milg = milg;
+         this.colr = colr;
+         this.msrp = msrp;
+
+
+         //Add the following methods to Car:
+         //*madeBefore2000()
+
+         this.madeBefore2000 = function () {
+             //returns true if the car's year is < 2000
+             return this.year < 2000;
+         };
+
+         //matchesColor(clr)
+         //returns true if the car's color contains clr
+         this.matchesColor = function (color) {
+             return this.colr.indexOf(color) != -1;
+         };
+
+         //isGoodDeal()
+         //returns true if the car's milage is less than the car's price*/
+         this.isGoodDeal = function() {
+             return this.milg < this.msrp;
+         };
+
+     }
+
+
+    var junkyard = [
+        //make    model    year  milg   colr   msrp
+        ['Honda','Accord','2015',27000,'bright blue', 17999],
+        ['Honda','crv','1990',200000,'gray',9800],
+        ['Toyota','corolla','2016',1000,'black',17999],
+        ['Subaru','Outback','1994',57000,'dark green',10889],
+        ['Honda','Accord','2015',27000,'blue',17999],
+        ['Lexus','hybrid','2016',1000,'midnight blue',52235],
+        ['Ford','Tarus','1990',137000,'white',10999],
+        ['Acura','Coup','1990',80000,'blue',13999],
+        ['Chevrolet','Camero','1985',95000,'yellow',20999]
+    ];
+
+    function tests() {
+        var testCar = new Car('Honda','Accord','2015',17000,'bright blue', 17999);
+        console.log(testCar.madeBefore2000() == false);
+        console.log(testCar.matchesColor("blue") == true);
+        console.log(testCar.matchesColor("red") == false);
+        console.log(testCar.isGoodDeal() == true);
+
+        var testCarTwo = new Car('Ford','Tarus','1990',137000,'white',10999);
+        console.log(testCarTwo.madeBefore2000() == true);
+        console.log(testCarTwo.matchesColor("white") == true);
+        console.log(testCarTwo.matchesColor("blue") == false);
+        console.log(testCarTwo.isGoodDeal() == false)
+    }
+    tests();
+
+
+
+
+// Write your code here!!!
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>
