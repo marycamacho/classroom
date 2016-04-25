@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<p>A small virtual pet project.</p>
+	<script>
+		/*
+			The model simulates the virtual pet's hunger level and other vital statistics.
+		*/
+		function PetModel() {
+			this.food = 4;
+		}
+
+		/*
+			The view is the user's primary interface with the virtual pet.
+		*/
+		function PetView(controller) {
+			this.display = function() {
+				console.log(controller.getFoodLevel());
+			};
+			this.feed = function() {
+				controller.eat();
+			};
+		}
+
+		/*
+			The controller handles the interactions between the view and the model. This is where the "logic" of the program lies.
+		*/
+		function PetController(model) {
+			this.getFoodLevel = function() {
+				return model.food;
+			};
+			this.eat = function() {
+				model.food += 1;
+			};
+		}
+
+		var model = new PetModel();
+		var controller = new PetController(model);
+		var view = new PetView(controller);
+
+		/**
+			Your homework:
+				* Create an HTML button to feed the virtual pet by calling view.feed();
+				* Create some other vital statistic for the virtual pet (hitpoints, cuddles, fur thickness, etc.). Create an html button (or two) which manipulates this stat.
+				* Instead of logging to the console, create some HTML which displays the current status of your virtual pet.
+
+			Optional Extra Work:
+				* Have the virtual pet's hunger increase over time
+				* Also make sure you don't overfeed it
+				* Create a system for managing other statistics about your virtual pet
+				* Create a small image or other graphic which represents your virtual pet
+				* Create the ability to have more than one virtual pet at a time
+		*/
+
+	</script>
+</body>
+</html>

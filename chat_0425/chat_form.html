@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="well">
+    <div class="row-fluid">
+        // create ui and ajax code that displays a way for user to send a chat message using the api info below
+        // upon click it should send a message and it should display all the other messages - look at link to find other messages
+        // use get to just retrieve all messages on page load (function defined below)
+        // put messages in well box (make pretty)
+
+        <div>
+
+
+        </div>
+        <div class="span6">
+
+            <div class="row-fluid">
+                <span class="span5" id="">
+                    <input id="sender" name="sender" placeholder="Sender" type="text"  class="sender-name">
+
+                </span>
+                <span class="span6 offset1">
+                    <input id="msg" name="msg" placeholder="Message" type="text-area" class="message-text">
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function handleResponse (response) {
+        $('#chats').html("");
+        for (var i = 0 ; i < response.length; i++) {
+            $('#chats'.append('<p> + response[i] +</p>'))
+        }
+    }
+    // this is supposed to be the jQuery click code that posts a new message using handleResponse.
+
+    //document.getElementByID("sendMessage").onclick = function() { var options = {message: document.getElementByID("newMessage".value}; $.post("http://159.203.175.239:3000/chat", {
+   /* message : $
+    }, function(response) {
+        console.log(response);
+    }, 'json');*/
+
+    // I want the jquery version here:
+
+    $sendChatMsg.click('#sendChat') = function () {
+        $.post("http://159.203.175.239:3000/chat", {
+            message : $
+        }, function(response) {
+            console.log(response);
+        }, 'json');
+    }
+
+    // this is supposed to be the get method that displays the messages upon opening page.
+
+    $.get("http://159.203.175.239:3000/chat", {}, handleResponse, 'json');
+
+    // reverse the order of the messages (response.reverse?)
+    // slice it so that only x number of messages display
+
+
+</script>
+</body>
+</html>
