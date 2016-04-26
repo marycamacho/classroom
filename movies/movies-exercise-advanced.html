@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Movie Rental Homework</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<style>
+		.container-top {
+			margin-top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container container-top">
+		<p>Your competitor, MovieCo, has released even more data about their rentals in 2014! Now you have the information about which movies were the most popular.</p>
+		<p>There's three more questions below for you to answer and become the #1 movie company in the world.</p>
+		<!-- <p>*Evil Laugh*</p> -->
+	</div>
+	<div class="container">
+		<table>
+			<tr>
+				<td>The most checked-out movie of 2014 was</td>
+				<td><span id="most-movie"></span></td>
+			</tr>
+			<tr>
+				<td>The least checked-out movie of 2014 was</td>
+				<td><span id="least-movie"></span></td>
+			</tr>
+			<tr>
+				<td>The favorite movie (most checkouts) for the user with the most checkouts in 2014 was</td>
+				<td><span id="favorite-movie"></span></td>
+			</tr>
+		</table>
+	</div>
+	<script>
+		/********
+		 This is boilerplate code to retrieve the movies and rental data from the server.
+		 Don't worry about how it works just yet (although you're welcome to read it).
+		 Head on down to "userFunction" below, which is where you'll write your code.
+		********/
+		function loadDoc(uri, callback) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					callback.call(this, xmlhttp.responseText);
+				}
+			};
+			xmlhttp.open("GET", uri, true);
+			xmlhttp.send();
+		}
+		var rentalsArray, moviesArray, loadedCount = 0;
+		var loadedRentals = function(rentalsJSON) {
+			rentalsArray = JSON.parse(rentalsJSON);
+			loadedCount += 1;
+			if (loadedCount == 2) {
+				userFunction();
+			}
+		};
+		var loadedMovies = function(moviesJSON) {
+			moviesArray = JSON.parse(moviesJSON);
+			loadedCount += 1;
+			if (loadedCount == 2) {
+				userFunction();
+			}
+		};
+		loadDoc("https://aerekos.herokuapp.com/getmoviesfile", loadedMovies);
+		loadDoc("https://aerekos.herokuapp.com/getrentalsfile", loadedRentals);
+	</script>
+	<script>
+		function userFunction() {
+			/*
+				Again, here is where you'll write your code.
+
+				rentalsArray is in the same format as yesterday.
+
+				moviesArray is in a similar format, with each line matching
+				"MovieID MovieName"
+
+				For Example,
+				"46 Gladiator"
+
+				Which means that movie ID 46 is the 2000 action/drama starring Russel Crowe.
+
+				Your job is to answer the questions:
+				Which movie was the most checked-out movie of 2014?
+				Which movie was the least checked-out movie of 2014?
+				For the user with the most checkouts, which movie did they checkout the most?
+			**/
+
+			//Let's see what's inside...
+			console.log(moviesArray);
+			console.log(rentalsArray);
+
+			/*
+				A hint: Think about how to index your movie names so that it's easy to
+				look up which movie has which id.
+			*/
+
+			//Which movie was the most checked-out movie of 2014?
+			document.getElementById('most-movie').innerHTML = "???";
+
+			//Which movie was the least checked-out movie of 2014?
+			document.getElementById('least-movie').innerHTML = "???";
+
+			//For the user with the most checkouts, which movie did they checkout the most?
+			document.getElementById('favorite-movie').innerHTML = "???";
+		}
+	</script>
+</body>
+</html>
