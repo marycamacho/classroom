@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Callbacks Practice | 1</title>
+</head>
+
+<body>
+	<p id="timer_tx"></p>
+	<p id="timer_ca"></p>
+	<script>
+		//	Part 1:
+		//	The following code works. Your job is to understand it.
+		//	Trace the code, starting with the call to timeFunction
+		//	at the bottom, all the way through to the final call to
+		//	displayResults. Write out the code path on paper.
+
+
+		//	Part 2 (optional):
+		//	The URL
+		//		https://fonts.googleapis.com/css?family=Lora
+		//	is located in california.
+		//
+		//	Write a function, getDataFromCalifornia, which times the
+		//	request to that URL. Put that time in the div #timer_ca above.
+
+		//this is called by line 60 and the getDataFromTexas is passed in as the parameter.
+		//the starttime is set as current time and in this case getDataFromTexas is being called and passed an anonymous function which will display results.
+		function timeFunction(functionToTime) {
+			var startTime = Date.now();
+			functionToTime(function () {
+				displayResults(startTime, document.getElementById("timer_tx"));
+			});
+		}
+		// this is being passed into and executed by the timeFunction and it includes the url that is being used to test and is then calling the doXHR function
+		function getDataFromTexas(callback) {
+			var url = "https://code.jquery.com/jquery-2.2.0.min.js";
+			doXHR(url, callback);
+		}
+
+		//copy based on CA URL
+		function getDataFromCalifornia(callback) {
+			var url = "https://fonts.googleapis.com/css?family=Lora";
+			doXHR(url, callback);
+		}
+
+		//this is being called by the getDataFromTexas function with the jQuery URL passed in as well as a callback
+
+		function doXHR(url, callback) {
+			// this function declares a new xhr http request so that we can can make the AJAX call
+			var xhr = new XMLHttpRequest();
+			// when event state change occurs, if we have positive results, we are then calling callback and passing in response.
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 &&
+					xhr.status == 200) {
+					callback(xhr.response);
+				}
+			}
+			// Sets up AJAX call using get, passing in URL - which in this case is the jQuery one above, and true is optional as it is what makes AJAX async and it's the default.
+			xhr.open("GET", url, true);
+			// AJAX call that sends the data
+			xhr.send();
+		}
+
+		// this is the callback from timeFunction that we run once the results from our AJAX call are returned - this paints the page with the results time results where we measure how long the call took.
+		function displayResults(startTime, element) {
+			// new variable declared as this is after positive response of AJAX call
+			var endTime = Date.now();
+			var pre = "It took ";
+			var post = "ms to get the data!";
+			element.innerHTML = pre + (endTime - startTime) + post;
+		}
+
+		//timeFunction(getDataFromTexas);
+		timeFunction(getDataFromCalifornia);
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitter Bot</title>
+    <script src="http://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id=""tweets">
+
+</div>
+
+<script>
+    var $tweets = $('#tweets');
+
+
+    var url = "https://search.twitter.com/";
+
+    var options = {
+        q: "CodeCraft",
+        result_type: "recent",
+        oatht_consumer_key: publicKey,
+        oath_token: privateKey
+    }
+
+    $.get(url, options, callback, 'json');
+
+    fucntion callback(results) {
+        console.log(results);
+    }
+
+
+
+</script>
+</body>
+</html>

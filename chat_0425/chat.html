@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+	<style>
+		#chats {
+			border: 1px solid black;
+			background-color: #999;
+			height: 200px;
+			overflow: scroll;
+		}
+	</style>
+</head>
+
+<body>
+	<input id="newMessage">
+	<button id="sendMessage">Send</button>
+	<div id="chats">
+
+
+	</div>
+	<script>
+		
+		/**
+		 * This is the callback that we will call after a successful GET or POST request from the server.
+		 * We expect response to be an array of strings representing every chat on the server.
+		 */
+		function handleResponse (response) {
+			console.log(response);
+			//clear out all of the existing chats
+			$('#chats').html("");
+			//show the newest chats on top
+			response.reverse();
+			//loop through all the chats
+			for (var i = 0; i < response.length; i++) {
+				//replaces HTML tags (optional)
+				response[i] = response[i].replace("<", "&lt;").replace(">", "&gt;");
+				//append the new chat as a <p> tag to #chats
+				$('#chats').append('<p>' + response[i] + '</p>');
+			}
+		}
+		
+		/**
+		 * Send a new message via post request
+		 * The message will be the contests of #newMessage
+		 */
+		function sendMessage() {
+			var options = {
+				message: $('#newMessage').val()
+			};
+			//clear out the text in #newMessage
+			$('#newMessage').val("");
+			//send the post request, call handleResponse(results) when we are done
+			$.post("http://159.203.175.239:3000/chat", options, handleResponse, 'json');
+		}
+		
+		/**
+		 * If we hit "enter" (keycode 13), send the message
+		 */
+		$('#newMessage').keyup(function(evt) {
+			if (evt.keyCode == 13) {
+				sendMessage();
+			}
+		});
+		
+		/**
+		 * If we click the send message button, send the message 
+		 */
+		$("#sendMessage").click(function () {
+			sendMessage();
+		});
+		
+		//Finally, get the current chats and display them
+		// {} == empty object (no options)
+		$.get("http://159.203.175.239:3000/chat", {}, handleResponse, 'json');
+	</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
