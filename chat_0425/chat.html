@@ -51,15 +51,16 @@
 			var options = {
 				message: $('#newMessage').val()
 			};
-			//clear out the text in #newMessage
+			//clear out the text in #newMessage input (need .val because is input)
 			$('#newMessage').val("");
-			//send the post request, call handleResponse(results) when we are done
+			//send the post request and then calls function handleResponse(results) when we are done parameters are url, the var defining what is being posted, the callback function and then the type
 			$.post("http://159.203.175.239:3000/chat", options, handleResponse, 'json');
 		}
 		
 		/**
 		 * If we hit "enter" (keycode 13), send the message
 		 */
+		//jquery function that runs on event of keyup - calls the new message function whenever the key 13 (enter) is released
 		$('#newMessage').keyup(function(evt) {
 			if (evt.keyCode == 13) {
 				sendMessage();
@@ -69,12 +70,13 @@
 		/**
 		 * If we click the send message button, send the message 
 		 */
+		//essentially same as above but on the click event
 		$("#sendMessage").click(function () {
 			sendMessage();
 		});
 		
-		//Finally, get the current chats and display them
-		// {} == empty object (no options)
+		//Finally, get function pulls the current chats and display them
+		// {} == empty object (no variable for options - as we are not sending data (bad to use on get)
 		$.get("http://159.203.175.239:3000/chat", {}, handleResponse, 'json');
 	</script>
 </body>

@@ -26,7 +26,7 @@
 		//	request to that URL. Put that time in the div #timer_ca above.
 
 		//this is called by line 60 and the getDataFromTexas is passed in as the parameter.
-		//the starttime is set as current time and in this case getDataFromTexas is being called and passed an anonymous function which will display results.
+		//the starttime is set as current time and in the original case getDataFromTexas is being called and passed an anonymous function which will display results.
 		function timeFunction(functionToTime) {
 			var startTime = Date.now();
 			functionToTime(function () {
@@ -39,10 +39,10 @@
 			doXHR(url, callback);
 		}
 
-		//copy based on CA URL
+		//copy of getDataFromTexas but with CA URL from notes above
 		function getDataFromCalifornia(callback) {
 			var url = "https://fonts.googleapis.com/css?family=Lora";
-			doXHR(url, callback);
+			//calls the dXHR function below
 		}
 
 		//this is being called by the getDataFromTexas function with the jQuery URL passed in as well as a callback

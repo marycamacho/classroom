@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Movie Rental Homework</title>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="http://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
 	<style>
 		.container-top {
 			margin-top: 20px;
@@ -52,6 +53,46 @@
 	</script>
 	<script>
 		function userFunction() {
+			//transforms rentalsArray from array of strings to array of arrays (not needed)
+			/*var newRentalsArray = rentalsArray.map(function(n) {
+				return n.split(' ');
+			});*/
+
+			// returns array of users (first element in each original string)
+			var users = rentalsArray.map(function(n) {
+				var innerArrayUsers = n.split(' ');
+				return innerArrayUsers[0];
+			});
+
+			// retruns array of months (last element in each string)
+			var months = rentalsArray.map(function(n) {
+				var innerArrayMonths = n.split(' ');
+				return innerArrayMonths[2];
+			});
+
+			// function for determining mode of any array
+			function mode(array) {
+				if(array.length == 0)
+					return null;
+				var modeMap = {};
+				var maxEl = array[0], maxCount = 1;
+				for(var i = 0; i < array.length; i++)
+				{
+					var el = array[i];
+					if(modeMap[el] == null)
+						modeMap[el] = 1;
+					else
+						modeMap[el]++;
+					if(modeMap[el] > maxCount)
+					{
+						maxEl = el;
+						maxCount = modeMap[el];
+					}
+				}
+				return maxEl;
+			}
+
+
 			/*
 				Hey! This is where you'll write your code.
 
@@ -88,11 +129,14 @@
 				Write your code to calculate the answers, and put the answers in place of the "???" below.
 			*/
 
+			var maxUsers = mode(users);
+			var maxMonths = mode(months);
+
 			//Which user had the most checkouts.
-			document.getElementById('most-checkouts').innerHTML = "???";
+			document.getElementById('most-checkouts').innerHTML = maxUsers;
 
 			//Which month has the most checkouts?
-			document.getElementById('most-month').innerHTML = "???";
+			document.getElementById('most-month').innerHTML = maxMonths;
 		}
 	</script>
 </body>
