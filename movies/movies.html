@@ -58,11 +58,28 @@
 				return n.split(' ');
 			});*/
 
+			// returns array of single element in each original string
+
+			/*var createInnerArray = (function(array,stringIndex){
+				[i] = stringIndex;
+				return array.map(function(n, [i]) {
+					var innerArray = n.split(' ');
+					return innerArray[i];
+				});
+			});*/
+
+
 			// returns array of users (first element in each original string)
-			var users = rentalsArray.map(function(n) {
+			var usersArray = rentalsArray.map(function(n) {
 				var innerArrayUsers = n.split(' ');
 				return innerArrayUsers[0];
 			});
+			// returns array of months (last element in each string)
+			var monthsArray = rentalsArray.map(function(n) {
+				var innerArrayMonths = n.split(' ');
+				return innerArrayMonths[2];
+			});
+
 
 			// returns array of months (last element in each string)
 			var months = rentalsArray.map(function(n) {
@@ -92,8 +109,10 @@
 				return maxEl;
 			}
 
-			var maxUsers = mode(users);
-			var maxMonths = mode(months);
+			var maxUsers = mode(usersArray);
+			var maxMonths = mode(monthsArray);
+
+			//var testRentals =
 
 			//Which user had the most checkouts.
 			document.getElementById('most-checkouts').innerHTML = maxUsers;
