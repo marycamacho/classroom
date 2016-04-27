@@ -64,7 +64,7 @@
 				return innerArrayUsers[0];
 			});
 
-			// retruns array of months (last element in each string)
+			// returns array of months (last element in each string)
 			var months = rentalsArray.map(function(n) {
 				var innerArrayMonths = n.split(' ');
 				return innerArrayMonths[2];
@@ -92,43 +92,6 @@
 				return maxEl;
 			}
 
-
-			/*
-				Hey! This is where you'll write your code.
-
-				The variable rentalsArray contains all of the rentals in the format:
-				"Username Movie# Month"
-
-				For example:
-				"User2 43 March"
-
-				Which means that "User2" rented movie number 43 (The Pianist) in March. You don't have
-				the list of movie IDs yet - that's for tomorrow's homework!
-
-				Your job is to answer the two questions:
-				Which user had the most checkouts in 2014?
-				Which month had the most checkouts in 2014?
-			**/
-
-			//Let's see what's inside...
-			console.log(rentalsArray);
-
-			/*
-				Okay! Let's figure out which user had the most checkouts!
-
-				First you'll want to go through the array, which is composed of strings,
-				and figure out how to get just the parts you want.
-			*/
-
-			/*
-				Now that we have our data in a consumable format, we just need to iterate through the
-				arrays and keep track of which user had the most checkouts.
-
-				Hint: You'll probably need to create at least one more array to keep track of checkout counts per user or per month.
-
-				Write your code to calculate the answers, and put the answers in place of the "???" below.
-			*/
-
 			var maxUsers = mode(users);
 			var maxMonths = mode(months);
 
@@ -138,6 +101,42 @@
 			//Which month has the most checkouts?
 			document.getElementById('most-month').innerHTML = maxMonths;
 		}
+
+		/*
+		 Hey! This is where you'll write your code.
+
+		 The variable rentalsArray contains all of the rentals in the format:
+		 "Username Movie# Month"
+
+		 For example:
+		 "User2 43 March"
+
+		 Which means that "User2" rented movie number 43 (The Pianist) in March. You don't have
+		 the list of movie IDs yet - that's for tomorrow's homework!
+
+		 Your job is to answer the two questions:
+		 Which user had the most checkouts in 2014?
+		 Which month had the most checkouts in 2014?
+		 **/
+
+		//Let's see what's inside...
+		//console.log(rentalsArray);
+
+		/*
+		 Okay! Let's figure out which user had the most checkouts!
+
+		 First you'll want to go through the array, which is composed of strings,
+		 and figure out how to get just the parts you want.
+		 */
+
+		/*
+		 Now that we have our data in a consumable format, we just need to iterate through the
+		 arrays and keep track of which user had the most checkouts.
+
+		 Hint: You'll probably need to create at least one more array to keep track of checkout counts per user or per month.
+
+		 Write your code to calculate the answers, and put the answers in place of the "???" below.
+		 */
 	</script>
 </body>
 </html>
