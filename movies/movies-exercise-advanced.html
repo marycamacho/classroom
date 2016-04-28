@@ -57,6 +57,7 @@
 			}
 		};
 		var loadedMovies = function(moviesJSON) {
+			//console.log("loadedMovies", moviesJSON)
 			moviesArray = JSON.parse(moviesJSON);
 			loadedCount += 1;
 			if (loadedCount == 2) {
@@ -90,20 +91,101 @@
 			//Let's see what's inside...
 			console.log(moviesArray);
 			console.log(rentalsArray);
-
 			/*
 				A hint: Think about how to index your movie names so that it's easy to
 				look up which movie has which id.
 			*/
 
+			// returns array of users (first element in each original string)
+			var usersArray = rentalsArray.map(function(n) {
+				var innerArrayUsers = n.split(' ');
+				return innerArrayUsers[0];
+			});
+			// returns array of months (last element in each string)
+			/*var monthsArray = rentalsArray.map(function(n) {
+				var innerArrayMonths = n.split(' ');
+				return innerArrayMonths[2];
+			});*/
+
+			// returns array of users (second element in each original string)
+			var moviesRentedArray = rentalsArray.map(function(n) {
+				var innerArrayRentedMovies = n.split(' ');
+				return innerArrayRentedMovies[1];
+			});
+
+			var movieListArray = moviesArray.map(function(n) {
+						return n.split(' ');
+					}
+			);
+
+
+
+			// function for determining mode of any array
+			function mode(array) {
+				if(array.length == 0)
+					return null;
+				var modeMap = {};
+				var maxEl = array[0], maxCount = 1;
+				for(var i = 0; i < array.length; i++)
+				{
+					var el = array[i];
+					if(modeMap[el] == null)
+						modeMap[el] = 1;
+					else
+						modeMap[el]++;
+					if(modeMap[el] > maxCount)
+					{
+						maxEl = el;
+						maxCount = modeMap[el];
+					}
+				}
+				return maxEl;
+			}
+			// this is the id of the movie rented the most times
+			var maxMoviesID = mode(moviesRentedArray);
+
+			// this should return the movie name associated to a  movieID that is passed as a parameter
+			var getMovieName = function(id){
+				var movieResult = movieListArray.filter(function (movie) {
+					return movie[0] == id;
+				});
+				return movieResult[0][1];
+			};
+
+
+			// this is the id of the least rented movie
+			//var minMoviesID = min(moviesArray);
+			//var minMinMovie = movieName(minMoviesID);
+
+			var maxUser = mode(usersArray);
+
+			//this function should return the favMovie for the maxUser of rentalsArray
+			var getFavMovie = function(user) {
+				var maxUserRentals = rentalsArray.filter(function (rental) {
+					var splitRental = rental.split (' ');
+					return splitRental[0] == user;
+				});
+				var maxUserRentedSplit = maxUserRentals.map(function(n) {
+					var innerArrayRentedMovies = n.split(' ');
+					return innerArrayRentedMovies[1];
+				});
+				var mostRented = mode(maxUserRentedSplit);
+
+				return getMovieName(mostRented);
+			};
+			var favMovie = getFavMovie(maxUser);
+
+
+			// not needed: var maxMonths = mode(monthsArray);
+
 			//Which movie was the most checked-out movie of 2014?
-			document.getElementById('most-movie').innerHTML = "???";
+			document.getElementById('most-movie').innerHTML = getMovieName(maxMoviesID);
 
 			//Which movie was the least checked-out movie of 2014?
-			document.getElementById('least-movie').innerHTML = "???";
+			document.getElementById('least-movie').innerHTML = "minMovie";
 
 			//For the user with the most checkouts, which movie did they checkout the most?
-			document.getElementById('favorite-movie').innerHTML = "???";
+			document.getElementById('favorite-movie').innerHTML = " " + favMovie;
 		}
 	</script>
 </body>
