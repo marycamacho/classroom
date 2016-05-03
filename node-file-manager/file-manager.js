@@ -67,21 +67,21 @@ function delFile(fileName) {
 //find and replace a word in the file
 
 function replaceWord(fileName, oldWord, newWord) {
-	fs.readFile(fileName, function(err, data) {
-		if (err) {
-			console.log('There was an error reading the file.');
-			console.log (err);
-		} else {
-			var result = data.toString().split(oldWord).join(newWord);
-			fs.writeFile(fileName, result, function (err) {
-				if (err) {
-					console.log("There was an error writing the file.");
-				} else {
-					console.log("The file was replaced with new words.");
-				}
-			})
-		}
-	})
+    fs.readFile(fileName, function(err, data) {
+        if (err) {
+            console.log('There was an error reading the file.');
+            console.log (err);
+        } else {
+            var result = data.toString().split(oldWord).join(newWord);
+            fs.writeFile(fileName, result, function (err) {
+                if (err) {
+                    console.log("There was an error writing the file.");
+                } else {
+                    console.log("The file was replaced with new words.");
+                }
+            })
+        }
+    })
 }
 
 		/*"replace" <file to search> <word to replace> <replacement word>
@@ -90,25 +90,27 @@ function replaceWord(fileName, oldWord, newWord) {
 		> replace what.txt there their
 			replace all instances of there in what.txt with their*/
 
-	// find a line in a file
+//find and replace a word in the file
+
+// find a line in a file
 function findLine(fileName, word) {
-	fs.readFile(fileName, function(err, data) {
-		if (err) {
-			console.log('There was an error reading the file.');
-			return console.log (err);
-		} else
-		fs.readFile(fileName, function(err, data) {
-			if (err) {
-				console.log("There was an error writing the file.");
-			} else {
-				data.toString().split('\n').forEach(function(line){
-					if (line.indexOf(word) !== -1) {
-						return console.log(line);
-					}
-				})
-			}
-		})
-	})
+    fs.readFile(fileName, function(err, data) {
+        if (err) {
+            console.log('There was an error reading the file.');
+            return console.log (err);
+        } else
+            fs.readFile(fileName, function(err, data) {
+                if (err) {
+                    console.log("There was an error writing the file.");
+                } else {
+                    data.toString().split('\n').forEach(function(line){
+                        if (line.indexOf(word) !== -1) {
+                            return console.log(line);
+                        }
+                    })
+                }
+            })
+    })
 }
 
 		/*"grep" <file name> <word to find>
